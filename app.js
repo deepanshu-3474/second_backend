@@ -1,16 +1,16 @@
 import express, { application } from 'express';
 import accountRouter from './src/routes/AccountRouter.js';
 import employeeRouter from './src/routes/EmployeeRouter.js';
-import {path} from 'path'
+import path from 'path'
 
 const app = express();
 app.use(express.json()); // express middleware
 app.use(express.urlencoded({extended:true})) // express middleware
 
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join("", 'dist')));
 
 app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+    res.sendFile(path.join("", 'dist', 'index.html'));
   });
 app.use("/api/v1/account",accountRouter);
 app.use("/api/v1/employee",employeeRouter);
