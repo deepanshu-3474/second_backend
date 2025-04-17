@@ -8,6 +8,9 @@ app.use(express.json()); // express middleware
 app.use(express.urlencoded({extended:true})) // express middleware
 
 
+app.get("/",function(req,res){
+    res.send("Wow !!")
+})
 app.use("/api/v1/account",accountRouter);
 app.use("/api/v1/employee",employeeRouter);
 // app.get("/api/v1/info/:name",search);
