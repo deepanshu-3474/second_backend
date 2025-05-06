@@ -151,9 +151,45 @@ export async function addEmployee(req,res,next){
 }
 
  }
- export async function searchEmployee(req,res,next) {
-    
- }
+ export async function searchEmployee(req, res, next) {
+    try {
+        const { field, value } = req.query;
+
+        if (!field || !value) {
+            return res.status(400).json({
+                status: "failed",
+                message: "Both 'field' and 'value' query parameters are required"
+            });
+        }
+
+        // Validate the field to avoid injection attacks
+        const allowedFields = ['emp_name', 'emp_email', 'emp_job_city', 'emp_maritail_status'];
+        if (!allowedFields.includes(field)) {
+            return res.status(400).json({
+                status: "failed",
+                message: `Invalid field. Allowed fields: ${allowedFields.join(", ")}`
+            });
+        }
+
+        const employees = await EmployeeModel.find({
+            [field]: { $regex: value, $options: 'i' }
+        });
+
+        res.status(200).json({
+            status: "success",
+            count: employees.length,
+            data: employees
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            status: "error",
+            message: "Internal Server Error"
+        });
+    }
+}
+
 
  export async function getDetails(req, res, next) {
     try {
