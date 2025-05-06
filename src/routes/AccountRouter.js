@@ -6,6 +6,7 @@ import { validation } from "../utils/validator.js";
 
 const accountRouter = express.Router();
 accountRouter.post("/signup",validation(),signup);
-accountRouter.post("/login",validation(),login)
+accountRouter.post("/login",validation(),login);
+// accountRouter.post("/forgetpassword",validation(),forget)
 
 export default accountRouter;

@@ -6,7 +6,7 @@ const transporter = nodemailer.createTransport({
   secure: false, // true for port 465, false for other ports
   auth: {
     user: "anshukeshri64@gmail.com",
-    pass: "xtlisgrsgvykxuef",
+    pass: "uaetgmpuzdonxsyk",
   },
 });
 
@@ -32,6 +32,7 @@ export async function verifyme(req,res, next) {
 
 export async function sendMainFun(sendData) {
   // send mail with defined transport object
+  console.log(sendData)
   
   const info = await transporter.sendMail({
     from: '"Maddison Foo Koch 👻"<anshukeshri64@gmail.com>', // sender address

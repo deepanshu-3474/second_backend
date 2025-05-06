@@ -21,7 +21,7 @@ export async function signup(req, res, next) {
                 const sendData = {
                    to:signupData.email,
                    subject:"Important !!",
-                   message:"<h1>Hello</h1>"
+                   message:"<h1>This mail is to verify ur details</h1> <button>Verify me</button>"
                 }
 
                 await sendMainFun(sendData).catch(console.error);
@@ -55,7 +55,8 @@ export async function login(req, res, next){
         password: data.password
     }
 
-    const user = await AccountModel.findOne({$and:[{email:loginData.email},{verify_email:true}]})
+    // const user = await AccountModel.findOne({$and:[{email:loginData.email},{verify_email:true}]})
+    const user = await AccountModel.findOne({email:loginData.email})
     if(user){
         if(isValidPassword(data.password,user.password)){
             const payload  = {
@@ -107,4 +108,12 @@ export async function changePassword(req,res,next){
 export async function verify(req, res ,next ){
     const data = req.body;
 
+
 }
+
+export async function forgetPassword(req, res ,next){
+    const data = req.body;
+
+
+}
+

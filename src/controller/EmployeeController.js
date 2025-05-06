@@ -1,5 +1,5 @@
+import axios from "axios";
 import EmployeeModel from "../model/EmployeeModel.js";
-
 export async function addEmployee(req,res,next){
     try{
         const data = req.body;
@@ -154,3 +154,18 @@ export async function addEmployee(req,res,next){
  export async function searchEmployee(req,res,next) {
     
  }
+
+ export async function getDetails(req, res, next) {
+    try {
+        const data = await axios.get('https://reqres.in/api/users?page=2');
+        res.json({
+            data: data.data
+        });
+    } catch (error) {
+        console.error(error);
+        res.json({
+            status: "not found",
+            message: error.message
+        });
+    }
+}

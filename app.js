@@ -1,6 +1,7 @@
 import express, { application } from 'express';
 import accountRouter from './src/routes/AccountRouter.js';
 import employeeRouter from './src/routes/EmployeeRouter.js';
+
 import path from 'path'
 
 const app = express();
@@ -14,6 +15,9 @@ app.get('/', function (req, res) {
   });
 app.use("/api/v1/account",accountRouter);
 app.use("/api/v1/employee",employeeRouter);
+// app.get("/", verifyAccount, (req, res) => {
+//   res.json({ message: `Welcome, ${req.user.name}` });
+// });
 // app.get("/api/v1/info/:name",search);
 
 // app.post("/api/v1/signup",signup);
