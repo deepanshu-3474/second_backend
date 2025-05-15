@@ -9,6 +9,7 @@ app.use(express.json()); // express middleware
 app.use(express.urlencoded({extended:true})) // express middleware
 
 app.use(express.static(path.join("", 'dist')));
+app.use("/image",express.static(path.join("", 'public/upload')))
 
 app.get('/', function (req, res) {
     res.sendFile(path.join("", 'dist', 'index.html'));

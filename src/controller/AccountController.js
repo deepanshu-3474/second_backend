@@ -18,13 +18,12 @@ export async function signup(req, res, next) {
         const resData = await AccountModel.create(signupData);
         if(resData){
 
-                const sendData = {
-                   to:signupData.email,
-                   subject:"Important !!",
-                   message:"<h1>This mail is to verify ur details</h1> <button>Verify me</button>"
-                }
-
-                await sendMainFun(sendData).catch(console.error);
+                // const sendData = {
+                //    to:signupData.email,
+                //    subject:"Important !!",
+                //    message:"<h1>This mail is to verify ur details</h1> <button>Verify me</button>"
+                // }
+//await sendMainFun(sendData).catch(console.error);
                 res.status(200).json({
                     status:"success",
                     message:"signup successfull",
@@ -69,6 +68,8 @@ export async function login(req, res, next){
             res.json({
                 status: "success",
                 message: "user exists",
+                name:user.name,
+                profile_image:user.profile_image,
                 token:token
             })
         }
@@ -116,4 +117,35 @@ export async function forgetPassword(req, res ,next){
 
 
 }
+export async function uploadeProfile(req,res,next) {
+    try{
+      //  const data = req.body;
+        const id = req.account_id;
+        const profile_image = req.profile_image;
+        const r = await AccountModel.updateOne({_id:id},{profile_image:profile_image});
+        if(r){
+            res.json({
+                status:"success",
+                message:"Profile Image Upload Successfully"
+            });
 
+        }
+        else{
+            res.json({
+                status:"failed",
+                message:"Something issue !!"
+            }); 
+        }
+      
+
+
+    }
+    catch(error){
+        console.error(error);
+        res.json({
+            status:"failed",
+            message:"Error !!"
+        }); 
+    }
+    
+}

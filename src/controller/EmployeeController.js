@@ -99,33 +99,45 @@ export async function addEmployee(req,res,next){
     }
     }
 
-    export async function deleteEmployee(req, res, next) {
-        try {
-            const emp_id = req.params.id;
+//  export async function deleteEmployee(req,res,next) {
+
+//     const data = req.params;
+//     const emp_id = data._id;
+
+//     const deleteEmp = await EmployeeModel.deleteOne({_id:emp_id})
+//     if(deleteEmp){
+//         res.json({
+//             status: "successfully deleted",
+//             data: deleteEmp
+//         })
+//     }
     
-            const deleteEmp = await EmployeeModel.deleteOne({ _id: emp_id });
-    
-            if (deleteEmp.deletedCount === 0) {
-                return res.status(404).json({
-                    status: "failed",
-                    message: "Employee not found"
-                });
-            }
-    
-            res.status(200).json({
-                status: "success",
-                message: "Employee deleted",
-                data: deleteEmp
-            });
-        } catch (error) {
-            res.status(500).json({
-                status: "error",
-                message: error.message
+//  }
+export async function deleteEmployee(req, res, next) {
+    try {
+        const emp_id = req.params.id;
+
+        const deleteEmp = await EmployeeModel.deleteOne({ _id: emp_id });
+
+        if (deleteEmp.deletedCount === 0) {
+            return res.status(404).json({
+                status: "failed",
+                message: "Employee not found"
             });
         }
+
+        res.status(200).json({
+            status: "success",
+            message: "Employee deleted",
+            data: deleteEmp
+        });
+    } catch (error) {
+        res.status(500).json({
+            status: "error",
+            message: error.message
+        });
     }
-    
-    
+}
  export async function getEmployee(req,res,next) {
     try{
         const empData = await EmployeeModel.find();
@@ -204,4 +216,25 @@ export async function addEmployee(req,res,next){
             message: error.message
         });
     }
+}
+export async function uploadImage(req,res,next) {
+    try{
+        const data = req.body
+        console.log(data)
+
+
+        res.json({
+            status:"success",
+            data: data
+        })
+    }
+    catch(error){
+        console.error(error);
+        res.json({
+            status: "not found",
+            message: error.message
+        });
+
+    }
+    
 }

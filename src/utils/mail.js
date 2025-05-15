@@ -4,10 +4,10 @@ const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
   secure: false, // true for port 465, false for other ports
-  auth: {
-    user: "anshukeshri64@gmail.com",
-    pass: "uaetgmpuzdonxsyk",
-  },
+  // auth: {
+  //   user: "anshukeshri64@gmail.com",
+  //   pass: "uaetgmpuzdonxsyk",
+  // },
 });
 
 // async..await is not allowed in global scope, must use a wrapper
