@@ -126,7 +126,8 @@ export async function uploadeProfile(req,res,next) {
         if(r){
             res.json({
                 status:"success",
-                message:"Profile Image Upload Successfully"
+                message:"Profile Image Upload Successfully",
+                profile_image:profile_image
             });
 
         }
@@ -136,8 +137,6 @@ export async function uploadeProfile(req,res,next) {
                 message:"Something issue !!"
             }); 
         }
-      
-
 
     }
     catch(error){
