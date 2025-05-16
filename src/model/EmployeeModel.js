@@ -36,7 +36,7 @@ const EmployeeSchema = new mongoose.Schema({
             message: ` not supported`
         }
     },
-    // emp_age:{type:Number,min:18,max:100},
+    emp_age:{type:Number,min:18,max:100},
 
 },{timestamps:true})
 
