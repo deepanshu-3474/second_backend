@@ -1,10 +1,11 @@
 import express, { application } from 'express';
 import accountRouter from './src/routes/AccountRouter.js';
 import employeeRouter from './src/routes/EmployeeRouter.js';
-
+import cors from 'cors'
 import path from 'path'
 
 const app = express();
+app.use(cors())
 app.use(express.json()); // express middleware
 app.use(express.urlencoded({extended:true})) // express middleware
 

@@ -7,7 +7,7 @@ import upload from "../middleware/uploadMiddleware.js";
 const employeeRouter = express.Router();
 
 employeeRouter.use(checkAuth);
-employeeRouter.post("/",query('emp_name','emp_email').notEmpty(),addEmployee);
+employeeRouter.post("/",query('emp_name','emp_email','emp_age').notEmpty(),addEmployee);
 employeeRouter.get("/getdetails",getDetails);
 employeeRouter.get("/search",searchEmployee);
 employeeRouter.get("/",getEmployee);
