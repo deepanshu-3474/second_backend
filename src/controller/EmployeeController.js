@@ -138,22 +138,50 @@ export async function deleteEmployee(req, res, next) {
         });
     }
 }
- export async function getEmployee(req,res,next) {
-    try{
-        const empData = await EmployeeModel.find();
+//  export async function getEmployee(req,res,next) {
+//     try{
+//         const empData = await EmployeeModel.find();
+//         res.json({
+//             status: "success",
+//             data: empData,
+//         });
+//     }
+//     catch(error){
+//         res.json({
+//             message: "data not found"
+//         })
+//     }   
+//  }
+
+ export async function getEmployee(req, res, next) {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        // const limit = parseInt(req.query.limit) || 10;
+        const limit = 2;
+        const skip = (page - 1) * limit;
+
+        const employees = await EmployeeModel.find().skip(skip).limit(limit);
+        
+        const totalEmployees = await EmployeeModel.countDocuments();
+
         res.json({
             status: "success",
-            data: empData,
+            page,
+            totalPages: Math.ceil(totalEmployees / limit),
+            totalEmployees,
+            data: employees
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            status: "error",
+            message: "Failed to fetch employees"
         });
     }
-    catch(error){
-        res.json({
-            message: "data not found"
-        })
-    }
-    
-    
- }
+}
+
+
+
  export async function singleEmployee(req,res,next) {
     // const data = req.body;
 
